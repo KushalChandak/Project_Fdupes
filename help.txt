@@ -1,0 +1,13 @@
+Usage: ./project [options] DIRECTORY...
+
+	-r --recurse     	for every directory given follow subdirectories
+                  		encountered within
+                  		
+	-n --noempty     	exclude zero-length files from consideration
+ 
+	-S --size        	show size of duplicate files
+ 
+	-m --summarize   	summarize dupe information
+	
+	-h --help        	display this help message
+
