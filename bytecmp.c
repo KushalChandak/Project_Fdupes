@@ -25,7 +25,7 @@ int bytecmp(char *argv1, char*argv2) {
 	int x, y;
 	while((x=fgetc(fp))!=EOF && (y=fgetc(fp1))!=EOF){
 				
-	if(x!=y){
+		if(x!=y){
 			
 			return 1;
 		}
