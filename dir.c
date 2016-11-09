@@ -37,9 +37,7 @@ void initfilesrec(const char *name, int *count) {
     	printf("%s\n", "error");
         return;
     }
-    //printf("%s\n",name);
-    /*if(strcmp(name,"./") == 0)	
-	strcpy((char *)name,".");*/
+    
 	do {
 		if (dir->d_type == DT_DIR) {
 		    char path[1024];
@@ -49,7 +47,7 @@ void initfilesrec(const char *name, int *count) {
 		    initfilesrec(path, count);
 		}
 		else {
-		    //printf("%s%s\n",name, dir->d_name);
+		    
 		    	filename[(*count)] = (char *)malloc(sizeof(char) * ((strlen(dir->d_name) + 1) + strlen(name)));
 			strcpy(filename[(*count)], name);
 			strcat(filename[(*count)], dir->d_name);
@@ -180,7 +178,7 @@ int main(int argc, char *argv[]){
 		if (d) {
 			while ((dir = readdir(d)) != NULL){
 				if (dir->d_type == DT_REG){
-					//printf("\t%s\n", dir->d_name);
+					
 					filename[i] = (char *)malloc(sizeof(char) * ((strlen(dir->d_name) + 1) + strlen(directory)));
 					strcpy(filename[i], directory);
 					strcat(filename[i++], dir->d_name);
@@ -233,31 +231,7 @@ int main(int argc, char *argv[]){
 		initfilesrec(directory, &i);
 	}
 	else {
-		/*i = 0;
-		/* this codes sets the directory 
-		strcpy(directory, argv[2]);
-		if(directory[strlen(directory) - 1] != '/')
-			strcat(directory, "/");
-		/* end */
-		/*  creates list of all files to be scanned 
 		
-		d = opendir(directory);
-		if(d == NULL) {
-			printf("%s: could not chdir to %s\n", argv[0], argv[argc - 1]);
-			return 1;
-		}
-		if (d) {
-			while ((dir = readdir(d)) != NULL){
-				if (dir->d_type == DT_REG){
-					//printf("\t%s\n", dir->d_name);
-					filename[i] = (char *)malloc(sizeof(char) * ((strlen(dir->d_name) + 1) + strlen(directory)));
-					strcpy(filename[i], directory);
-					strcat(filename[i++], dir->d_name);
-				}
-			}
-	    	closedir(d);
-	    	}*/
-	    	/* end */
 	    	printf("%s: Invalid options --'%s'\n", argv[0], argv[1]);
 	    	printf("Try `%s --help' for more information.\n", argv[0]);
 	    	return -1;
@@ -265,15 +239,15 @@ int main(int argc, char *argv[]){
     	int n = i;
     	for(i = 0; i < n; i++) {
     		for(j = i + 1; j < n; j++) {
-    			//printf("\t%s %s\n", filename[i], filename[j]);
+    			
     			r = fdupe(filename[i], filename[j], opt);
-    			//printf("%d\n", r);
+    			
     			if(r == 0) {
     				output[ocount] = (char *) malloc(sizeof(char) * (strlen(filename[i]) + 1));
     				strcpy(output[ocount++], filename[i]);
     				output[ocount] = (char *) malloc(sizeof(char) * (strlen(filename[j]) + 1));
     				strcpy(output[ocount++], filename[j]);
-    				//printf("%s\n%s\n\n", filename[i], filename[j]);
+    			
     			}
     		}
     	
@@ -288,7 +262,7 @@ int main(int argc, char *argv[]){
 void deleteall(char *s, int start, int end) {
 	if(start >= end)
 		return;
-	//printf("   %s %s\n", s, output[start]);
+	
 	deleteall(s, start + 1, end);
 	if(strcmp(output[start], s) == 0) {
 		strcpy(output[start], "");
@@ -305,7 +279,7 @@ void printchild(char *s, int start, int end) {
 	}
 	printchild(s, start + 2, end);
 	if(strcmp(output[start], s) == 0) {
-		//printf("\t%d %s->%s->%s\n",start, s, output[start], output[start + 1]);
+		
 		if(!dntprint)
 			printf("%s\n", output[start + 1]);
 		else {
@@ -316,10 +290,10 @@ void printchild(char *s, int start, int end) {
 			extrasize += ftell(fp);
 			fclose(fp);
 		}
-		//strcpy(output[start], "");
+		
 		deleteall(output[start], start, end);
 		deleteall(output[start + 1], start + 1, end);
-		//strcpy(output[start + 1], "");
+		
 	}
 }
 
@@ -342,15 +316,14 @@ void print(int end, int isCalSize) {
 			printf("\n");
 		}
 		else if(isCalSize == 2) {
-			//size = 0;
+			
 			FILE *fp = fopen(output[i], "r");
 			fseek(fp, 0, 2);
 			size += ftell(fp);
 			fclose(fp);
-			//printf("%ld bytes each:\n", size);
-			//printf("%s\n", output[i]);
+			
 				sets++;
-			//printf("%s\n", output[i + 1]);
+			
 				files++;
 				dntprint = 1;
 			printchild(output[i], i + 2, end);
