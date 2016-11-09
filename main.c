@@ -26,7 +26,7 @@ int fdupe(char *argv1,char *argv2, int opt){
 	int i=sizecmp(argv1,argv2, opt);
 	//if size = -1 hence unable to open
 	if(i == -1) {
-		//printf("Give Valid Input Files\n");
+		
 		return -1;
 	}
 			//size cmp
@@ -42,12 +42,12 @@ int fdupe(char *argv1,char *argv2, int opt){
 				//byte cmpare
 				a=bytecmp(argv1, argv2);
 					if(a==0){
-						//printf("%s\n%s\n\n", argv1, argv2);
+						
 						return 0;
 						}
 					}
 				}
-				//printf("Files Are Not A Duplicate %s %s\n",argv1, argv2);
+				
 				return 1;			
 }
 	
