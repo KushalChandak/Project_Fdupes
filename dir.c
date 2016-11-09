@@ -27,24 +27,23 @@ char directory[128];
 char **filename;
 void initfilesrec(const char *name, int *count) {
 	DIR *d;
-    struct dirent *dir;
-   
-    if (!(d = opendir(name))){
-    	printf("find : '%s' :\n", name);
-        return;
-    }
-    if (!(dir = readdir(d))){
-    	printf("%s\n", "error");
-        return;
-    }
+	struct dirent *dir;
+	if (!(d = opendir(name))){
+	printf("find : '%s' :\n", name);
+	return;
+	}
+	if (!(dir = readdir(d))){
+    		printf("%s\n", "error");
+        	return;
+	}
     
 	do {
 		if (dir->d_type == DT_DIR) {
 		    char path[1024];
 		    snprintf(path, sizeof(path), "%s%s/", name, dir->d_name);
 		    if (strcmp(dir->d_name, ".") == 0 || strcmp(dir->d_name, "..") == 0)
-		        continue;
-		    initfilesrec(path, count);
+			continue;
+			initfilesrec(path, count);
 		}
 		else {
 		    
