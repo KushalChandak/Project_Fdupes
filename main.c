@@ -22,7 +22,7 @@
 int fdupe(char *argv1,char *argv2, int opt){
 	int a;
 	if(argv1 == NULL || argv2 == NULL)
-		return -1;
+	return -1;
 	int i=sizecmp(argv1,argv2, opt);
 	//if size = -1 hence unable to open
 	if(i == -1) {
@@ -38,15 +38,15 @@ int fdupe(char *argv1,char *argv2, int opt){
 								
 				int z=strcmp(a1, a2);
 				//md5 equal
-				if(z == 0) {
-				//byte cmpare
-				a=bytecmp(argv1, argv2);
-					if(a==0){
+					if(z == 0) {
+					//byte cmpare
+					a=bytecmp(argv1, argv2);
+						if(a==0){
 						
-						return 0;
+							return 0;
 						}
 					}
-				}
+			}
 				
 				return 1;			
 }
