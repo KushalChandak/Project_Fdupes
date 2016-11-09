@@ -24,8 +24,6 @@
 
 void calmd5(char *argv1, char* a){
 	unsigned char c[MD5_DIGEST_LENGTH];
-	//file *file=fopen(argv[1],"r")
-    	//char *filename;
 	int i;
 	FILE *inFile = fopen (argv1, "rb");
 	MD5_CTX mdContext;
@@ -40,9 +38,7 @@ void calmd5(char *argv1, char* a){
 	while ((bytes = fread (data, 1, 1024, inFile)) != 0)
 		MD5_Update (&mdContext, data, bytes);
 	MD5_Final (c,&mdContext);
-	//for(i = 0; i < MD5_DIGEST_LENGTH; i++)
-	//printf("%02x", c[i]);
-	//printf ("\n");
+	
 	fclose (inFile);
 	strcpy(a,c);
 }
