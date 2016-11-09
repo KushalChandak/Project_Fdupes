@@ -36,7 +36,7 @@ void calmd5(char *argv1, char* a){
 
 	MD5_Init (&mdContext);	
 	while ((bytes = fread (data, 1, 1024, inFile)) != 0)
-		MD5_Update (&mdContext, data, bytes);
+	MD5_Update (&mdContext, data, bytes);
 	MD5_Final (c,&mdContext);
 	
 	fclose (inFile);
